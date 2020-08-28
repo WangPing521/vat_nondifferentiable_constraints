@@ -1,0 +1,53 @@
+Arch:
+  name: unet
+  num_classes: 2
+  input_dim: 1
+
+Optim:
+  name: RAdam
+  lr: 0.0001
+  weight_decay: 0.0005
+
+Dataset: acdc
+
+Scheduler:
+  name: CosineAnnealingLR
+  T_max: 90
+  warmup:
+    multiplier: 300
+    total_epoch: 10
+
+RegScheduler:
+  begin_epoch: 5
+  max_epoch: 50
+  max_value: 0.001
+
+RegScheduler1:
+  begin_epoch: 5
+  max_epoch: 50
+  max_value: 0.001
+
+Data:
+  unlabeled_data_ratio: 0.01
+  labeled_data_ratio: 0.99
+  seed: 1
+
+DataLoader:
+  labeled_batch_size: 4
+  unlabeled_batch_size: 4
+  val_batch_size: 6
+  shuffle: True
+  num_workers: 0
+
+Trainer:
+  device: cuda
+  save_dir: tmp
+  num_batches: 200
+  max_epoch: 100
+
+Train_vat: False
+
+Constraints:
+  confident: False
+
+seed: 123
